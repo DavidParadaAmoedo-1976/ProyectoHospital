@@ -10,13 +10,13 @@ import java.util.List;
 public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
 
     @Override
-    public void crear(PacientesMySql p) {
+    public void crear(PacientesMySql paciente) {
         String sql = "INSERT INTO pacientes (nombre, email, fecha_nacimiento) VALUES (?, ?, ?)";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, p.getNombre());
-            ps.setString(2, p.getEmail());
-            ps.setDate(3, Date.valueOf(p.getFechaNacimiento()));
+            ps.setString(1, paciente.getNombre());
+            ps.setString(2, paciente.getEmail());
+            ps.setDate(3, Date.valueOf(paciente.getFechaNacimiento()));
             ps.executeUpdate();
             System.out.println("Se ha creado el paciente correctamente");
         } catch (SQLException e) {
@@ -60,5 +60,7 @@ public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
             System.err.println("Error al eliminar el paciente: " + e.getMessage());
         }
     }
+
+
 }
 

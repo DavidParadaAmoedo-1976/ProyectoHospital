@@ -1,25 +1,20 @@
 import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
 import DAO.*;
-import Modelo.EspecialidadesPostgre;
-import Modelo.MedicosPostgre;
-import Modelo.PacientesMySql;
-import Modelo.TratamientosMySql;
+import Modelo.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
 public class Programa {
     static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         int opcion = -1;
-        while (opcion != 0 ){
+        while (opcion != 0) {
             mostrarMenu();
 
             opcion = sc.nextInt();
@@ -64,29 +59,22 @@ public class Programa {
     }
 
     private static void eliminarTratamientoPorNombre() {
-        if (mostrarTratamientos()) {
-            String nombreTratamiento = ValidarDatos.leerNombre("tratamiento");
-            String sql = "SELECT id_tratmiento where nombre_tratamiento = ?";
+        if (mostrarTratamientos()) return;
+        String nombreTratamiento = ValidarDatos.leerNombre("tratamiento");
+        TratamientosMySqlDAO mySqlDAO = new TratamientosMySqlDAO();
+        TratamientosPostgreDAO postgreDAO = new TratamientosPostgreDAO();
 
-            try (Connection conn = ConexionMySQL.getInstancia().getConexion();
-                 Statement st = conn.createStatement();
-                 ResultSet rs = st.executeQuery(sql)) {
+        int idTratamiento = mySqlDAO.obtenerIdPorNombre(nombreTratamiento);
 
-                while (rs.next()) {
-                    lista.add(new TratamientosMySql(
-                            rs.getInt("id_tratamiento"),
-                    ));
-                }
-
-            } catch (SQLException e) {
-                System.err.println("Error al listar los tratamientos: " + e.getMessage());
-            }
+        if (idTratamiento != -1) {
+            mySqlDAO.eliminar(idTratamiento);
+            postgreDAO.eliminar(idTratamiento);
+            System.out.println("Tratamiento eliminado correctamente de ambas bases de datos.");
 
 
-            return idTratamiento;
+        } else {
+            System.out.println("No se encontró ningún tratamiento con el nombre " + nombreTratamiento + ".");
         }
-        }
-
     }
 
     private static void crearTratamiento() {
@@ -111,10 +99,12 @@ public class Programa {
         TratamientosMySqlDAO tratamientosMySqlDAO = new TratamientosMySqlDAO();
 
         try {
-            int idTratamiento = tratamientosPostgreDAO.crearTratamiento(idEspecialidad, idMedico);
+            TratamientosPostgre tratamiento = new TratamientosPostgre(idEspecialidad, idMedico);
+            int idTratamiento = tratamientosPostgreDAO.obtenerId(tratamiento);
 
             if (idTratamiento != -1) {
-                tratamientosMySqlDAO.crear(idTratamiento, nombreTratamiento, descripcion);
+                TratamientosMySql nuevoTratamiento = new TratamientosMySql(idTratamiento, nombreTratamiento, descripcion);
+                tratamientosMySqlDAO.crear(nuevoTratamiento);
                 System.out.println("Tratamiento creado correctamente en ambas bases de datos.");
             } else {
                 System.out.println("No se pudo crear el tratamiento en MySQL.");
@@ -224,7 +214,7 @@ public class Programa {
         if (medicos.isEmpty()) {
             System.out.println("No hay médicos registrados.");
             return true;
-            }
+        }
 
         System.out.println("\n*** Médicos disponibles ***");
         for (MedicosPostgre m : medicos) {
@@ -248,7 +238,7 @@ public class Programa {
 
     }
 
-    private static void paginar(List lista){
+    private static void paginar(List lista) {
         final int ELEMENTOS_POR_PAGINA = 10;
         int pagina = 0;
 
@@ -295,4 +285,4 @@ public class Programa {
     }
 
 
-    }
+}
