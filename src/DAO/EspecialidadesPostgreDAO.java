@@ -31,19 +31,7 @@ public class EspecialidadesPostgreDAO implements CRUD<EspecialidadesPostgre> {
     }
 
     @Override
-    public EspecialidadesPostgre leerPorId(int id) {
-        return null;
-    }
-
-
-    @Override
-    public void actualizar(EspecialidadesPostgre entidad) {
-
-    }
-
-    @Override
     public void eliminar(int id) {
-
     }
 
     @Override
@@ -56,19 +44,15 @@ public class EspecialidadesPostgreDAO implements CRUD<EspecialidadesPostgre> {
              ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
-                EspecialidadesPostgre e = new EspecialidadesPostgre(
+                EspecialidadesPostgre especialidadesPostgre = new EspecialidadesPostgre(
                         rs.getInt("id_especialidad"),
                         rs.getString("nombre_especialidad")
                 );
-                lista.add(e);
+                lista.add(especialidadesPostgre);
             }
-
         } catch (SQLException e) {
-            System.err.println("❌ Error al leer especialidades: " + e.getMessage());
+            System.err.println("Error al leer las especialidades: " + e.getMessage());
         }
-
         return lista;
     }
-
-
 }

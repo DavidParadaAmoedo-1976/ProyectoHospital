@@ -25,28 +25,6 @@ public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
     }
 
     @Override
-    public PacientesMySql leerPorId(int id) {
-        String sql = "SELECT * FROM pacientes WHERE id_paciente = ?";
-        PacientesMySql pacientesMySql = null;
-        try (Connection conn = ConexionMySQL.getInstancia().getConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                pacientesMySql = new PacientesMySql(
-                        rs.getInt("id_paciente"),
-                        rs.getString("nombre"),
-                        rs.getString("email"),
-                        rs.getDate("fecha_nacimiento").toLocalDate()
-                );
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al leer el paciente: " + e.getMessage());
-        }
-        return pacientesMySql;
-    }
-
-    @Override
     public List<PacientesMySql> leerTodos() {
         List<PacientesMySql> lista = new ArrayList<>();
         String sql = "SELECT * FROM pacientes";
@@ -65,22 +43,6 @@ public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
             System.err.println("Error al leer los pacientes: " + e.getMessage());
         }
         return lista;
-    }
-
-    @Override
-    public void actualizar(PacientesMySql p) {
-        String sql = "UPDATE pacientes SET nombre = ?, email = ?, fecha_nacimiento = ? WHERE id_paciente = ?";
-        try (Connection conn = ConexionMySQL.getInstancia().getConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, p.getNombre());
-            ps.setString(2, p.getEmail());
-            ps.setDate(3, Date.valueOf(p.getFechaNacimiento()));
-            ps.setInt(4, p.getIdPaciente());
-            ps.executeUpdate();
-            System.out.println("Se ha actualizado el correctamente");
-        } catch (SQLException e) {
-            System.err.println("Error al actualizar el paciente: " + e.getMessage());
-        }
     }
 
     @Override
