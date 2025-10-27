@@ -4,8 +4,12 @@ import DAO.*;
 import Modelo.EspecialidadesPostgre;
 import Modelo.MedicosPostgre;
 import Modelo.PacientesMySql;
+import Modelo.TratamientosMySql;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -60,7 +64,28 @@ public class Programa {
     }
 
     private static void eliminarTratamientoPorNombre() {
-        System.out.println("PENDIENTE");
+        if (mostrarTratamientos()) {
+            String nombreTratamiento = ValidarDatos.leerNombre("tratamiento");
+            String sql = "SELECT id_tratmiento where nombre_tratamiento = ?";
+
+            try (Connection conn = ConexionMySQL.getInstancia().getConexion();
+                 Statement st = conn.createStatement();
+                 ResultSet rs = st.executeQuery(sql)) {
+
+                while (rs.next()) {
+                    lista.add(new TratamientosMySql(
+                            rs.getInt("id_tratamiento"),
+                    ));
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Error al listar los tratamientos: " + e.getMessage());
+            }
+
+
+            return idTratamiento;
+        }
+        }
 
     }
 
@@ -206,6 +231,21 @@ public class Programa {
             System.out.println("ID.- " + m.getIdMedico() + " - " + m.getNombre() + " - " + m.getNombreContacto());
         }
         return false;
+    }
+
+    private static boolean mostrarTratamientos() {
+        TratamientosMySqlDAO tratamientosMySqlDAO = new TratamientosMySqlDAO();
+        List<TratamientosMySql> tratamientos = tratamientosMySqlDAO.leerTodos();
+        if (tratamientos.isEmpty()) {
+            System.out.println("No existe ningun tratamiento");
+            return true;
+        }
+        System.out.println("\n*** Tratamientos disponibles ***");
+        for (TratamientosMySql elemento : tratamientos) {
+            System.out.println("ID.- " + elemento.getIdTratamiento() + " - " + elemento.getNombreTratamiento());
+        }
+        return false;
+
     }
 
     private static void paginar(List lista){

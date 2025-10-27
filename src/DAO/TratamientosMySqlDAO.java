@@ -1,10 +1,11 @@
 package DAO;
 
 import Conexiones.ConexionMySQL;
+import Modelo.TratamientosMySql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TratamientosMySqlDAO {
 
@@ -24,6 +25,33 @@ public class TratamientosMySqlDAO {
         } catch (SQLException e) {
             System.err.println("Error al insertar tratamiento en MySQL: " + e.getMessage());
         }
+    }
+
+    public List<TratamientosMySql> leerTodos() {
+        List<TratamientosMySql> lista = new ArrayList<>();
+        String sql = """
+                   SELECT id_tratamiento, nombre_tratamiento, descripcion
+                   FROM tratamientos
+                   ORDER BY id_tratamiento
+                """;
+
+        try (Connection conn = ConexionMySQL.getInstancia().getConexion();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                lista.add(new TratamientosMySql(
+                        rs.getInt("id_tratamiento"),
+                        rs.getString("nombre_tratamiento"),
+                        rs.getString("descripcion")
+                ));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al listar los tratamientos: " + e.getMessage());
+        }
+
+        return lista;
     }
 }
 

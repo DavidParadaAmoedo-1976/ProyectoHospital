@@ -9,7 +9,7 @@ public class ConexionMySQL {
     private static Connection conexion;
     private final String URL = "jdbc:mysql://localhost:3306/hospital_mysql";
     private final String USUARIO = "root";
-    private final String PASSWORD = "Diego-230911";
+    private final String PASSWORD = "abc123.";
 
     private ConexionMySQL() {
         try {

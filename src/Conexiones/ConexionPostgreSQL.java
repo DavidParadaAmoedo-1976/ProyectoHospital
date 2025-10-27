@@ -9,7 +9,7 @@ public class ConexionPostgreSQL {
     private static Connection conexion;
     private final String URL = "jdbc:postgresql://localhost:5432/hospital_postgre";
     private final String USUARIO = "postgres";
-    private final String PASSWORD = "Diego-230911";
+    private final String PASSWORD = "abc123.";
 
     private ConexionPostgreSQL() {
         try {
