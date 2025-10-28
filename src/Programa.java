@@ -154,10 +154,10 @@ public class Programa {
     }
 
     private static void crearEspecialidad() {
-        String nombre_especialidad = ValidarDatos.leerNombre("especialidad");
+        String nombreEspecialidad = ValidarDatos.leerNombre("especialidad");
 
         EspecialidadesPostgreDAO especialidadesDAO = new EspecialidadesPostgreDAO();
-        especialidadesDAO.crear(new EspecialidadesPostgre(nombre_especialidad));
+        especialidadesDAO.crear(new EspecialidadesPostgre(nombreEspecialidad));
     }
 
     private static void mostrarMenu() {

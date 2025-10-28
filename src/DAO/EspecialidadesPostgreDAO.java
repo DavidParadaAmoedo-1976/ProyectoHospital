@@ -22,10 +22,10 @@ public class EspecialidadesPostgreDAO implements CRUD<EspecialidadesPostgre> {
             ps.setString(1, especialidadesPostgre.getNombre_especialidad());
 
             ps.executeUpdate();
-            System.out.println("Médico insertado correctamente en PostgreSQL.");
+            System.out.println("Especialñidad insertada correctamente en PostgreSQL.");
 
         } catch (SQLException e) {
-            System.err.println("Error al insertar médico: " + e.getMessage());
+            System.err.println("Error al insertar especialidad: " + e.getMessage());
         }
 
     }
