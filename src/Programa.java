@@ -166,7 +166,7 @@ public class Programa {
                 "\t 2.- Crear un nuevo médico.\n" +
                 "\t 3.- Eliminar un médico por ID.\n" +
                 "\t 4.- Crear un nuevo paciente.\n" +
-                "\t 5.- Eliminar un paciente     *** preguntar que opción ***\n" +
+                "\t 5.- Eliminar un paciente.\n" +
                 "\t 6.- Crear nuevo tratamiento (nombre, descripción, especialidad, médico).\n" +
                 "\t 7.- Eliminar un tratamiento por su nombre (MySQL + PostgreSQL)\n" +
                 "\t 8.- Listar tratamientos (menos de X pacientes asignados) (MySQL)\n" +
