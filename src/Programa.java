@@ -2,8 +2,6 @@ import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
 import DAO.*;
 import Modelo.*;
-import com.mysql.cj.xdevapi.PreparableStatement;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;

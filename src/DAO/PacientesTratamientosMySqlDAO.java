@@ -27,9 +27,10 @@ public class PacientesTratamientosMySqlDAO implements CRUD<PacientesTratamientos
 
     public void tratamientoPorNumeroPacientes(int numero) {
         String sql = """
-                Select patr.id_tratamiento, count(patr.id_paciente) as numero_pacientes, min(patr.fecha_inicio) from pacientes_tratamientos patr
+                Select patr.id_tratamiento, count(patr.id_paciente) as numero_pacientes 
+                from pacientes_tratamientos patr
                 Group by patr.id_tratamiento
-                Having Count(patr.id_paciente) <= ?;
+                Having Count(patr.id_paciente) <= ?
                 """;
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -41,10 +42,10 @@ public class PacientesTratamientosMySqlDAO implements CRUD<PacientesTratamientos
             while (rs.next()) {
                 int idTratamiento = rs.getInt("id_tratamiento");
                 int numPacientes = rs.getInt("numero_pacientes");
-                Date fechaInicio = rs.getDate("fecha_inicio");
 
-                System.out.printf("ID Tratamiento: %d | Fecha inicio: %s | Nº Pacientes: %d%n",
-                        idTratamiento, fechaInicio, numPacientes);
+
+                System.out.printf("ID Tratamiento: %d | Nº Pacientes: %d%n",
+                        idTratamiento, numPacientes);
             }
 
         } catch (SQLException e) {
