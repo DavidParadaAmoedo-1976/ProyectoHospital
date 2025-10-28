@@ -2,7 +2,9 @@ import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
 import DAO.*;
 import Modelo.*;
+import com.mysql.cj.xdevapi.PreparableStatement;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -56,7 +58,11 @@ public class Programa {
     }
 
     private static void listarTratamientoPorMaximoDePacientes() {
-        System.out.println("PENDIENTE");
+        int numeroDePacientes = ValidarDatos.enteroCorrecto("Introduce el limite de pacientes para la busqueda: ",1,Integer.MAX_VALUE );
+        PacientesTratamientosMySqlDAO pacientesTratamientosMySqlDAO = new PacientesTratamientosMySqlDAO();
+        pacientesTratamientosMySqlDAO.tratamientoPorNumeroPacientes(numeroDePacientes);
+
+
     }
 
     private static void eliminarTratamientoPorNombre() {
@@ -169,9 +175,9 @@ public class Programa {
                 "\t 4.- Crear un nuevo paciente.\n" +
                 "\t 5.- Eliminar un paciente.\n" +
                 "\t 6.- Crear nuevo tratamiento (nombre, descripción, especialidad, médico).\n" +
-                "\t 7.- Eliminar un tratamiento por su nombre (MySQL + PostgreSQL)\n" +
+                "\t 7.- Eliminar un tratamiento por su nombre.\n" +
                 "\t 8.- Listar tratamientos (menos de X pacientes asignados) (MySQL)\n" +
-                "\t 9.- Obtener el total de citas realizadas por cada paciente (MySQL)\n" +
+                "\t 9.- Obtener el total de citas realizadas por cada paciente.\n" +
                 "\t10.- Obtener la cantidad de tratamientos por sala (PostgreSQL)\n" +
                 "\t11.- Listar todos los tratamientos con sus respectivas especalidades y médicos (MySQL + PostgreSQL)\n" +
                 "\t12.- Obtener todos los pacientes que han recibido un tratamiento de una especialidad dada (MySQL + PostgreSQL).\n" +
