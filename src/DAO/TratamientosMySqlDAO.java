@@ -93,7 +93,3 @@ public class TratamientosMySqlDAO implements CRUD<TratamientosMySql> {
     }
 
 }
-
-
-
-

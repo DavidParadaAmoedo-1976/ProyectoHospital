@@ -3,33 +3,33 @@ package Modelo;
 import java.time.LocalDate;
 
 public class CitasMySql {
-    private int id_cita;
-    private int id_paciente;
+    private int idCita;
+    private int idPaciente;
     private LocalDate fecha;
 
     public CitasMySql() {
     }
 
-    public CitasMySql(int id_cita, int id_paciente, LocalDate fecha) {
-        this.id_cita = id_cita;
-        this.id_paciente = id_paciente;
+    public CitasMySql(int idCita, int idPaciente, LocalDate fecha) {
+        this.idCita = idCita;
+        this.idPaciente = idPaciente;
         this.fecha = fecha;
     }
 
-    public int getId_cita() {
-        return id_cita;
+    public int getIdCita() {
+        return idCita;
     }
 
-    public void setId_cita(int id_cita) {
-        this.id_cita = id_cita;
+    public void setIdCita(int idCita) {
+        this.idCita = idCita;
     }
 
-    public int getId_paciente() {
-        return id_paciente;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId_paciente(int id_paciente) {
-        this.id_paciente = id_paciente;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public LocalDate getFecha() {
@@ -43,6 +43,6 @@ public class CitasMySql {
     @Override
     public String toString() {
         return  "\nCita " +
-                "\nId de la cita: " + id_cita + ", Id del paciente: " + id_paciente + ", Fecha: " + fecha;
+                "\nId de la cita: " + idCita + ", Id del paciente: " + idPaciente + ", Fecha: " + fecha;
     }
 }

@@ -51,7 +51,8 @@ public class Programa {
     }
 
     private static void listarCitasPorPaciente() {
-        System.out.println("PENDIENTE");
+            CitasMySqlDAO citasMySqlDAO = new CitasMySqlDAO();
+            citasMySqlDAO.totalCitasPorPaciente();
     }
 
     private static void listarTratamientoPorMaximoDePacientes() {
@@ -161,7 +162,7 @@ public class Programa {
     }
 
     private static void mostrarMenu() {
-        System.out.print("\n\t\t\t===== MENU HOSPITAL =====\n" +
+        System.out.print("\n\n\t\t\t===== MENU HOSPITAL =====\n" +
                 "\n\t 1.- Crear una nueva especialidad médica.\n" +
                 "\t 2.- Crear un nuevo médico.\n" +
                 "\t 3.- Eliminar un médico por ID.\n" +
