@@ -9,18 +9,18 @@ import java.util.List;
 
 public class TratamientosMySqlDAO implements CRUD<TratamientosMySql> {
     @Override
-    public void crear(TratamientosMySql tratamiento) {
+    public void crear(TratamientosMySql nuevoTratamiento) {
         String sql = "INSERT INTO tratamientos (id_tratamiento, nombre_tratamiento, descripcion) VALUES (?, ?, ?)";
 
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, tratamiento.getIdTratamiento());
-            ps.setString(2, tratamiento.getNombreTratamiento());
-            ps.setString(3, tratamiento.getDescripcion());
+            ps.setInt(1, nuevoTratamiento.getIdTratamiento());
+            ps.setString(2, nuevoTratamiento.getNombreTratamiento());
+            ps.setString(3, nuevoTratamiento.getDescripcion());
             ps.executeUpdate();
 
-            System.out.println("Tratamiento insertado en MySQL con ID " + tratamiento.getIdTratamiento());
+            System.out.println("Tratamiento insertado en MySQL con ID " + nuevoTratamiento.getIdTratamiento());
 
         } catch (SQLException e) {
             System.err.println("Error al insertar tratamiento en MySQL: " + e.getMessage());

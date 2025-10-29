@@ -3,13 +3,17 @@ package DAO;
 import Conexiones.ConexionPostgreSQL;
 import Modelo.TratamientosPostgre;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class TratamientosPostgreDAO implements CRUD<TratamientosPostgre> {
 
     @Override
     public void crear(TratamientosPostgre tratamiento) {
+
         String sql = "INSERT INTO hospital.tratamientos (id_medico, id_especialidad) VALUES (?, ?)";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
@@ -26,30 +30,6 @@ public class TratamientosPostgreDAO implements CRUD<TratamientosPostgre> {
         }
     }
 
-    public int obtenerId(TratamientosPostgre tratamiento) {
-        String sql = "INSERT INTO hospital.tratamientos (id_medico, id_especialidad) VALUES (?, ?) RETURNING id_tratamiento";
-        int idGenerado = -1;
-
-        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, tratamiento.getIdMedico());
-            ps.setInt(2, tratamiento.getIdEspecialidad());
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    idGenerado = rs.getInt("id_tratamiento");
-                }
-            }
-
-            System.out.println("Tratamiento insertado en PostgreSQL con ID " + idGenerado);
-
-        } catch (SQLException e) {
-            System.err.println("Error al insertar tratamiento en PostgreSQL: " + e.getMessage());
-        }
-
-        return idGenerado;
-    }
 
     @Override
     public List<TratamientosPostgre> leerTodos() {
@@ -73,6 +53,31 @@ public class TratamientosPostgreDAO implements CRUD<TratamientosPostgre> {
         } catch (SQLException e) {
             System.err.println("Error al eliminar en PostgreSQL: " + e.getMessage());
         }
+    }
+
+    public int obtenerId(TratamientosPostgre tratamiento) {
+        String sql = "INSERT INTO hospital.tratamientos (id_medico, id_especialidad) VALUES (?, ?) RETURNING id_tratamiento";
+//        int idGenerado = -1;
+
+        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, tratamiento.getIdMedico());
+            ps.setInt(2, tratamiento.getIdEspecialidad());
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int idTratamiento = rs.getInt("id_tratamiento");
+                System.out.println("Tratamiento insertado en PostgreSQL con ID " + idTratamiento);
+                return idTratamiento;
+            }
+
+
+        } catch (SQLException e) {
+            System.err.println("Error al insertar tratamiento en PostgreSQL: " + e.getMessage());
+        }
+
+        return -1;
     }
 
 }
