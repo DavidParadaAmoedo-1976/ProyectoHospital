@@ -104,7 +104,7 @@ public class Programa {
         TratamientosMySqlDAO tratamientosMySqlDAO = new TratamientosMySqlDAO();
 
         try {
-            TratamientosPostgre tratamiento = new TratamientosPostgre(idEspecialidad, idMedico);
+            TratamientosPostgre tratamiento = new TratamientosPostgre(idMedico,idEspecialidad);
             int idTratamiento = tratamientosPostgreDAO.obtenerId(tratamiento);
 
             if (idTratamiento != -1) {
