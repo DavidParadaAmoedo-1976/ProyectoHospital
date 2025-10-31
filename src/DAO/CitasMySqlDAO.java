@@ -68,7 +68,7 @@ public class CitasMySqlDAO {
         }
     }
 
-    public void totalCitasPorPaciente() {
+    public static void totalCitasPorPaciente() {
         String sql = """
                 SELECT paciente.nombre as nombre_paciente, COUNT(cont.id_cita) AS total_citas
                                 FROM pacientes paciente

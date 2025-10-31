@@ -82,4 +82,27 @@ public class MedicosPostgreDAO{
             System.err.println("Error al eliminar el médico: " + e.getMessage());
         }
     }
+
+    public int obtenerIdPorNif(String nif) {
+        String sql = " Select id_medico From hospital.medicos Where (contacto).nif = ?";
+
+        int id = -1;
+        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nif);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("el Id del Médico es: " + id);
+                return rs.getInt("id_medico");
+
+            } else {
+                System.out.println("No se encontro ningun Médico con ese NIF.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar el Médico.");
+        }
+        return -1;
+    }
 }

@@ -49,4 +49,21 @@ public class EspecialidadesPostgreDAO{
         }
         return lista;
     }
+
+    public int obtenerIdPorNombre(String nombre) {
+        String sql = "SELECT id_especialidad FROM hospital.especialidades WHERE nombre_especialidad = ?";
+        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+                return rs.getInt("id_especialidad");
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener ID de especialidad: " + e.getMessage());
+        }
+        return -1;
+    }
+
 }

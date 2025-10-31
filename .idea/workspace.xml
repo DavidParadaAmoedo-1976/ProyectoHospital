@@ -4,11 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="eliminar configuraciones y evitarlas" />
+    <list default="true" id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="avanzando">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/CitasMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/CitasMySqlDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/SalasTratamientosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SalasTratamientosPostgreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Programa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Programa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ValidarDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ValidarDatos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/otros" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,6 +57,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
@@ -77,13 +96,21 @@
       <option name="project" value="LOCAL" />
       <updated>1761763739858</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="avanzando">
+      <option name="closed" value="true" />
+      <created>1761938482484</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1761938482484</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cambios" />
-    <MESSAGE value="avanzando" />
     <MESSAGE value="eliminar configuraciones y evitarlas" />
-    <option name="LAST_COMMIT_MESSAGE" value="eliminar configuraciones y evitarlas" />
+    <MESSAGE value="avanzando" />
+    <option name="LAST_COMMIT_MESSAGE" value="avanzando" />
   </component>
 </project>

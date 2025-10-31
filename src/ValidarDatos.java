@@ -30,7 +30,7 @@ public class ValidarDatos {
         String email = "";
         try {
             do {
-                System.out.println("Introduzca su correo electrónico:");
+                System.out.println("Introduzca Email:");
                 email = sc.nextLine().trim();
             } while (email.length() > 100 || !email.matches("^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"));
         } catch (Exception e) {
