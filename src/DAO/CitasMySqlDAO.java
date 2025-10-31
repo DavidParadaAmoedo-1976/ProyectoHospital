@@ -8,9 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CitasMySqlDAO implements CRUD<CitasMySql> {
+public class CitasMySqlDAO {
 
-    @Override
     public void crear(CitasMySql cita) {
         String sql = "INSERT INTO citas (id_paciente, fecha) VALUES (?, ?)";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
@@ -27,7 +26,6 @@ public class CitasMySqlDAO implements CRUD<CitasMySql> {
         }
     }
 
-    @Override
     public List<CitasMySql> leerTodos() {
         List<CitasMySql> citas = new ArrayList<>();
         String sql = "SELECT id_cita, id_paciente, fecha FROM citas";
@@ -52,7 +50,6 @@ public class CitasMySqlDAO implements CRUD<CitasMySql> {
         return citas;
     }
 
-    @Override
     public void eliminar(int id) {
         String sql = "DELETE FROM citas WHERE id_cita = ?";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();

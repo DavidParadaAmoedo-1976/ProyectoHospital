@@ -47,6 +47,7 @@ public class Programa {
     }
 
     private static void listarTratamientosPorSala() {
+
         System.out.println("PENDIENTE");
     }
 
@@ -127,9 +128,12 @@ public class Programa {
         pacientesMySqlDAO.eliminar(idPaciente);
     }
 
+    private static void crearPaciente(String nombre, String email, LocalDate fecha){
+        PacientesMySqlDAO pacientesMySqlDAO = new PacientesMySqlDAO();
+        pacientesMySqlDAO.crear(new PacientesMySql(nombre, email, fecha));
+    }
     private static void crearPaciente() {
         String nombre = ValidarDatos.leerNombre("paciente");
-        System.out.println("Introduce el email: ");
         String email = ValidarDatos.leerEmail();
         System.out.println("Introduce la fecha de nacimiento con formato AAAA-MM-DD: ");
         LocalDate fecha = ValidarDatos.fechaCorrecta();
@@ -160,6 +164,9 @@ public class Programa {
 
     private static void crearEspecialidad() {
         String nombreEspecialidad = ValidarDatos.leerNombre("especialidad");
+        crearEspecialidad((nombreEspecialidad));
+    }
+    private static void crearEspecialidad(String nombreEspecialidad){
 
         EspecialidadesPostgreDAO especialidadesDAO = new EspecialidadesPostgreDAO();
         especialidadesDAO.crear(new EspecialidadesPostgre(nombreEspecialidad));

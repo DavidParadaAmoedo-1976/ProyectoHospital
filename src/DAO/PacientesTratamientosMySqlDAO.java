@@ -10,20 +10,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-public class PacientesTratamientosMySqlDAO implements CRUD<PacientesTratamientosMySql> {
-    @Override
-    public void crear(PacientesTratamientosMySql entidad) {
-
-    }
-
-    @Override
-    public List<PacientesTratamientosMySql> leerTodos() {
-        return List.of();
-    }
-
-    @Override
-    public void eliminar(int id) {
-    }
+public class PacientesTratamientosMySqlDAO {
 
     public void tratamientoPorNumeroPacientes(int numero) {
         String sql = """

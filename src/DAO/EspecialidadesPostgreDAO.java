@@ -8,10 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EspecialidadesPostgreDAO implements CRUD<EspecialidadesPostgre> {
+public class EspecialidadesPostgreDAO{
 
 
-    @Override
     public void crear(EspecialidadesPostgre especialidadesPostgre) {
         String sql = "INSERT INTO hospital.especialidades (nombre_especialidad)" +
                 "VALUES (?)";
@@ -30,11 +29,6 @@ public class EspecialidadesPostgreDAO implements CRUD<EspecialidadesPostgre> {
 
     }
 
-    @Override
-    public void eliminar(int id) {
-    }
-
-    @Override
     public List<EspecialidadesPostgre> leerTodos() {
         List<EspecialidadesPostgre> lista = new ArrayList<>();
         String sql = "SELECT id_especialidad, nombre_especialidad FROM hospital.especialidades";

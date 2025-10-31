@@ -6,9 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicosPostgreDAO implements CRUD<MedicosPostgre> {
+public class MedicosPostgreDAO{
 
-    @Override
     public void crear(MedicosPostgre medico) {
         String sql = "INSERT INTO hospital.medicos (nombre_medico, contacto)" +
                      "VALUES (?, ROW(?, ?, ?, ?)::hospital.contacto_medico)";
@@ -30,7 +29,6 @@ public class MedicosPostgreDAO implements CRUD<MedicosPostgre> {
         }
     }
 
-    @Override
     public List<MedicosPostgre> leerTodos() {
         List<MedicosPostgre> lista = new ArrayList<>();
         String sql = """
@@ -66,7 +64,6 @@ public class MedicosPostgreDAO implements CRUD<MedicosPostgre> {
         return lista;
     }
 
-    @Override
     public void eliminar(int id) {
         String sql = "DELETE FROM hospital.medicos WHERE id_medico = ?";
 

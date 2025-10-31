@@ -7,9 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
+public class PacientesMySqlDAO {
 
-    @Override
     public void crear(PacientesMySql paciente) {
         String sql = "INSERT INTO pacientes (nombre, email, fecha_nacimiento) VALUES (?, ?, ?)";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
@@ -24,7 +23,6 @@ public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
         }
     }
 
-    @Override
     public List<PacientesMySql> leerTodos() {
         List<PacientesMySql> lista = new ArrayList<>();
         String sql = "SELECT * FROM pacientes";
@@ -45,7 +43,6 @@ public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
         return lista;
     }
 
-    @Override
     public void eliminar(int id) {
         String sql = "DELETE FROM pacientes WHERE id_paciente = ?";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
@@ -60,7 +57,5 @@ public class PacientesMySqlDAO implements CRUD<PacientesMySql> {
             System.err.println("Error al eliminar el paciente: " + e.getMessage());
         }
     }
-
-
 }
 
