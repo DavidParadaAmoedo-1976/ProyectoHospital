@@ -2,15 +2,12 @@ package DAO;
 
 import Conexiones.ConexionMySQL;
 import Modelo.PacientesMySql;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PacientesMySqlDAO {
 
     public void crear(PacientesMySql paciente) {
-        String sql = "INSERT INTO pacientes (nombre, email, fecha_nacimiento) VALUES (?, ?, ?)";
+        String sql = "insert into pacientes (nombre, email, fecha_nacimiento) values (?, ?, ?)";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, paciente.getNombre());
@@ -23,28 +20,24 @@ public class PacientesMySqlDAO {
         }
     }
 
-    public List<PacientesMySql> leerTodos() {
-        List<PacientesMySql> lista = new ArrayList<>();
-        String sql = "SELECT * FROM pacientes";
+    public static void leerTodosReducido() {
+        String sql = "select id_paciente, nombre from pacientes";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
+
+            System.out.println("\n  *** Lista de pacientes ***");
             while (rs.next()) {
-                lista.add(new PacientesMySql(
-                        rs.getInt("id_paciente"),
-                        rs.getString("nombre"),
-                        rs.getString("email"),
-                        rs.getDate("fecha_nacimiento").toLocalDate()
-                ));
+                System.out.println("Id.- " + rs.getInt("id_paciente") + "\tNombre: " + rs.getString("nombre"));
             }
+
         } catch (SQLException e) {
             System.err.println("Error al leer los pacientes: " + e.getMessage());
         }
-        return lista;
     }
 
     public void eliminar(int id) {
-        String sql = "DELETE FROM pacientes WHERE id_paciente = ?";
+        String sql = "delete from pacientes where id_paciente = ?";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

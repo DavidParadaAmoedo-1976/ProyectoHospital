@@ -2,10 +2,8 @@ import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
 import DAO.*;
 import Modelo.*;
-
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 public class Programa {
@@ -92,7 +90,7 @@ public class Programa {
     }
 
     private static void eliminarPaciente() {
-        if (mostrarPacientes()) return;
+        PacientesMySqlDAO.leerTodosReducido();
         int idPaciente = ValidarDatos.enteroCorrecto("\nIntroduce el ID del paciente: ", 1, Integer.MAX_VALUE);
 
         eliminarPaciente(idPaciente);
@@ -121,8 +119,6 @@ public class Programa {
     }
 
     private static void crearTratamiento(String nombre, String descripcion, String nombreEspecialidad, String nifMedico) {
-        System.out.println("\n*** Creando tratamiento automático ***");
-
         EspecialidadesPostgreDAO especialidadesDAO = new EspecialidadesPostgreDAO();
         MedicosPostgreDAO medicosDAO = new MedicosPostgreDAO();
 
@@ -198,49 +194,6 @@ public class Programa {
         TratamientosPostgreDAO.obtenerTratamientoPorEspecialidad(idEspecialidad);
     }
 
-    private static boolean mostrarPacientes() {
-        PacientesMySqlDAO pacientesMySqlDAO = new PacientesMySqlDAO();
-        List<PacientesMySql> pacientes = pacientesMySqlDAO.leerTodos();
-
-        if (pacientes.isEmpty()) {
-            System.out.println("No hay pacientes en la lista.");
-            return true;
-        }
-        System.out.println("\n*** Pacientes ***\n");
-        return false;
-    }
-
-/*
-    private static boolean mostrarMedicos() {
-        MedicosPostgreDAO medicosPostgreDAO = new MedicosPostgreDAO();
-        List<MedicosPostgre> medicos = medicosPostgreDAO.leerTodos();
-        if (medicos.isEmpty()) {
-            System.out.println("No hay médicos registrados.");
-            return true;
-        }
-
-        System.out.println("\n*** Médicos disponibles ***");
-        for (MedicosPostgre m : medicos) {
-            System.out.println("ID.- " + m.getIdMedico() + " - " + m.getNombre() + " - " + m.getNombreContacto());
-        }
-        return false;
-    }
-
-
-    private static boolean mostrarTratamientos() {
-        TratamientosMySqlDAO tratamientosMySqlDAO = new TratamientosMySqlDAO();
-        List<TratamientosMySql> tratamientos = tratamientosMySqlDAO.leerTodos();
-        if (tratamientos.isEmpty()) {
-            System.out.println("No existe ningun tratamiento");
-            return true;
-        }
-        System.out.println("\n*** Tratamientos disponibles ***");
-        for (TratamientosMySql elemento : tratamientos) {
-            System.out.println("ID.- " + elemento.getIdTratamiento() + " - " + elemento.getNombreTratamiento());
-        }
-        return false;
-    }
-*/
     private static void crearTratamientoComun(String nombre, String descripcion, int idEspecialidad, int idMedico) {
         TratamientosPostgreDAO tratamientosPostgreDAO = new TratamientosPostgreDAO();
         TratamientosMySqlDAO tratamientosMySqlDAO = new TratamientosMySqlDAO();

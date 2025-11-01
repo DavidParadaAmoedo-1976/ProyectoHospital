@@ -1,16 +1,14 @@
 package DAO;
+
 import Conexiones.ConexionPostgreSQL;
 import Modelo.MedicosPostgre;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MedicosPostgreDAO{
 
     public void crear(MedicosPostgre medico) {
         String sql = "insert into hospital.medicos (nombre_medico, contacto)" +
-                     "values (?, row(?, ?, ?, ?)::hospital.contacto_medico);";
+                     "values (?, row(?, ?, ?, ?)::hospital.contacto_medico)";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -26,32 +24,6 @@ public class MedicosPostgreDAO{
 
         } catch (SQLException e) {
             System.err.println("Error al insertar médico: " + e.getMessage());
-        }
-    }
-
-    public static void leerTodos() {
-        String sql = """
-                    select id_medico, nombre_medico, (contacto).nombre_contacto as "Nombre de contacto",
-                    (contacto).nif as NIF, (contacto).telefono as Telefono, (contacto).email as Email
-                    from hospital.medicos
-                    order by id_medico
-                    """;
-
-        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
-
-            System.out.println("\n  *** Mostrando los médicos disponibles ***");
-            while (rs.next()) {
-                System.out.println(rs.getInt("id_medico") +
-                        rs.getString("nombre_medico") +
-                        rs.getString("Nombre de contacto") +
-                        rs.getString("NIF") +
-                        rs.getString("Telefono") +
-                        rs.getString("Email"));
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al listar médicos: " + e.getMessage());
         }
     }
 
@@ -96,7 +68,7 @@ public class MedicosPostgreDAO{
     }
 
     public int obtenerIdPorNif(String nif) {
-        String sql = " select id_medico from hospital.medicos where (contacto).nif = ?";
+        String sql = "select id_medico from hospital.medicos where (contacto).nif = ?";
 
         int id = -1;
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();

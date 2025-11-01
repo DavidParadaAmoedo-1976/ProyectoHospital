@@ -2,7 +2,6 @@ package DAO;
 
 import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +48,7 @@ public class FuncionesCombinadasDAO {
                     String especialidad = rsPostgre.getString("nombre_especialidad");
                     String medico = rsPostgre.getString("nombre_medico");
 
-                    System.out.printf("\n          ID: " + idTratamientoMysql +
+                    System.out.print("\n          ID: " + idTratamientoMysql +
                             "\n Tratamiento: " + nombre +
                             "\n Descripción: " + descripcion +
                             "\nEspecialidad: " + especialidad +

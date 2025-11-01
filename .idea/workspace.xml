@@ -4,24 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="avanzando">
+    <list default="true" id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="Cambios esteticos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/CitasMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/CitasMySqlDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/FuncionesCombinadasDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/FuncionesCombinadasDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PacientesMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PacientesMySqlDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PacientesTratamientosMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PacientesTratamientosMySqlDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/SalasTratamientosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SalasTratamientosPostgreDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/TratamientosMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TratamientosMySqlDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/CitasMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/CitasMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/EspecialidadesPostgre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/EspecialidadesPostgre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/MedicosPostgre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/MedicosPostgre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/PacientesMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/PacientesMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/PacientesTratamientosMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/PacientesTratamientosMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/SalasPostgre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/SalasPostgre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/SalasTratamientosPostgre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/SalasTratamientosPostgre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/TratamientosMySql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/TratamientosMySql.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modelo/TratamientosPostgre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modelo/TratamientosPostgre.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Programa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Programa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,13 +144,22 @@
       <option name="project" value="LOCAL" />
       <updated>1762001598183</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Cambios esteticos">
+      <option name="closed" value="true" />
+      <created>1762017371860</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1762017371860</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cambios" />
     <MESSAGE value="eliminar configuraciones y evitarlas" />
     <MESSAGE value="avanzando" />
-    <option name="LAST_COMMIT_MESSAGE" value="avanzando" />
+    <MESSAGE value="Cambios esteticos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios esteticos" />
   </component>
 </project>

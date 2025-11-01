@@ -3,7 +3,6 @@ package DAO;
 import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
 import Modelo.TratamientosPostgre;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,14 +52,14 @@ public class TratamientosPostgreDAO {
     public static void obtenerTratamientoPorEspecialidad(int id_especialidad) {
         String sql = "select id_tratamiento from hospital.tratamientos where id_especialidad = ?;";
         String sql2 = """
-                select p.nombre As "Nombre del Paciente", t.nombre_tratamiento as Tratamiento
-                from pacientes p
-                join pacientes_tratamientos pt
-                on p.id_paciente = pt.id_paciente
-                join tratamientos  t
-                on t.id_tratamiento = pt.id_Tratamiento
-                where t.id_tratamiento = ?
-                """;
+                    select p.nombre As "Nombre del Paciente", t.nombre_tratamiento as Tratamiento
+                    from pacientes p
+                    join pacientes_tratamientos pt
+                    on p.id_paciente = pt.id_paciente
+                    join tratamientos  t
+                    on t.id_tratamiento = pt.id_Tratamiento
+                    where t.id_tratamiento = ?
+                    """;
 
         try (Connection connPostgre = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement psPostgre = connPostgre.prepareStatement(sql)) {

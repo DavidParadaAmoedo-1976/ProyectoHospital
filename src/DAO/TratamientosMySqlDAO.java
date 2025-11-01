@@ -2,15 +2,12 @@ package DAO;
 
 import Conexiones.ConexionMySQL;
 import Modelo.TratamientosMySql;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TratamientosMySqlDAO {
 
     public void crear(TratamientosMySql nuevoTratamiento) {
-        String sql = "INSERT INTO tratamientos (id_tratamiento, nombre_tratamiento, descripcion) VALUES (?, ?, ?)";
+        String sql = "insert into tratamientos (id_tratamiento, nombre_tratamiento, descripcion) values (?, ?, ?)";
 
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -26,27 +23,6 @@ public class TratamientosMySqlDAO {
             System.err.println("Error al insertar tratamiento en MySQL: " + e.getMessage());
         }
     }
-/*
-    public static void leerTodos() {
-        String sql = """
-                    select id_tratamiento, nombre_tratamiento, descripcion
-                    from tratamientos
-                    order by id_tratamiento
-                    """;
-
-        try (Connection conn = ConexionMySQL.getInstancia().getConexion();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
-
-            while (rs.next()) {
-                System.out.println(rs.getInt("id_tratamiento") + rs.getString("nombre_tratamiento") + rs.getString("descripcion"));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error al listar los tratamientos: " + e.getMessage());
-        }
-    }
- */
 
     public static void leerTodosReducido() {
         String sql = """
@@ -69,7 +45,7 @@ public class TratamientosMySqlDAO {
     }
 
     public void eliminar(int id) {
-        String sql = "DELETE FROM tratamientos WHERE id_tratamiento = ?";
+        String sql = "delete from tratamientos where id_tratamiento = ?";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -84,7 +60,7 @@ public class TratamientosMySqlDAO {
     }
 
     public int obtenerIdPorNombre(String nombreTratamiento) {
-        String sql = "SELECT id_tratamiento FROM tratamientos WHERE nombre_tratamiento = ?";
+        String sql = "select id_tratamiento from tratamientos where nombre_tratamiento = ?";
         int id = -1;
 
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
@@ -98,7 +74,7 @@ public class TratamientosMySqlDAO {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al obtener ID del tratamiento por nombre: " + e.getMessage());
+            System.err.println("Error al obtener el ID del tratamiento: " + e.getMessage());
         }
         return -1;
     }

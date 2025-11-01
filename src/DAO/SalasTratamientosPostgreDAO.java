@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class SalasTratamientosPostgreDAO {
 
     public static void listarTratamientosPorSala() {
@@ -17,7 +16,7 @@ public class SalasTratamientosPostgreDAO {
                     on s.id_sala = st.id_sala
                     group by "nombre de la sala"
                     order by "cantidad de tratamientos" desc
-                """;
+                    """;
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              Statement st = conn.createStatement();
@@ -30,7 +29,7 @@ public class SalasTratamientosPostgreDAO {
             }
 
         } catch (SQLException e) {
-            System.err.println("Error al obtener total de citas: " + e.getMessage());
+            System.err.println("Error al obtener el total de las citas: " + e.getMessage());
         }
     }
 }

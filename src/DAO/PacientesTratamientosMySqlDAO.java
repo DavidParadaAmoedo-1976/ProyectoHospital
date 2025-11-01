@@ -1,38 +1,35 @@
 package DAO;
 
 import Conexiones.ConexionMySQL;
-import Modelo.PacientesTratamientosMySql;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
 
 public class PacientesTratamientosMySqlDAO {
 
     public void tratamientoPorNumeroPacientes(int numero) {
         String sql = """
-                Select patr.id_tratamiento, count(patr.id_paciente) as numero_pacientes 
-                from pacientes_tratamientos patr
-                Group by patr.id_tratamiento
-                Having Count(patr.id_paciente) <= ?
+                        select t.id_tratamiento, t.nombre_tratamiento as nombreTratamiento, count(pt.id_paciente) as numeroPacientes
+                        from tratamientos t
+                        left join pacientes_tratamientos pt
+                        on t.id_tratamiento = pt.id_tratamiento
+                        group by t.id_tratamiento
+                        having count(pt.id_paciente) <= ?
                 """;
+
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, numero);
             ResultSet rs = ps.executeQuery();
 
-            System.out.println("\n*** Tratamientos con menos de " + numero + " pacientes ***\n");
+            System.out.println("\n*** Tratamientos con " + numero + " o menos pacientes ***\n");
             while (rs.next()) {
-                int idTratamiento = rs.getInt("id_tratamiento");
-                int numPacientes = rs.getInt("numero_pacientes");
+                String nombreTratamiento = rs.getString("nombreTratamiento");
+                int numPacientes = rs.getInt("numeroPacientes");
 
-
-                System.out.printf("ID Tratamiento: %d | Nº Pacientes: %d%n",
-                        idTratamiento, numPacientes);
+                System.out.printf("\n%-30s %s" , nombreTratamiento  , "\t-> Nº Pacientes: " + numPacientes);
             }
 
         } catch (SQLException e) {
