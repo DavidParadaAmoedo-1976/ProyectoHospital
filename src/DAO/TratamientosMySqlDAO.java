@@ -80,7 +80,7 @@ public class TratamientosMySqlDAO {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                return rs.getInt("id_tratamiento");
+                    return rs.getInt("id_tratamiento");
                 }
             }
         } catch (SQLException e) {

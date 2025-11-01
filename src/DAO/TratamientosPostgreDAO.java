@@ -1,7 +1,9 @@
 package DAO;
 
+import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
 import Modelo.TratamientosPostgre;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,25 +50,61 @@ public class TratamientosPostgreDAO {
         }
     }
 
-    public int obtenerIdTratamientoPorEspecialidad(){
+    public static void obtenerTratamientoPorEspecialidad(int id_especialidad) {
         String sql = "Select id_tratamiento From hospital.tratamientos Where id_especialidad = ?;";
-        int id_especialidad = -1;
+        String sql2 = """
+                Select p.nombre As "Nombre del Paciente", t.nombre_tratamiento As Tratamiento
+                From pacientes p
+                Join pacientes_tratamientos pt
+                On p.id_paciente = pt.id_paciente
+                Join tratamientos  t
+                On t.id_tratamiento = pt.id_Tratamiento
+                Where t.id_tratamiento = ?
+                """;
 
-        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
-             PreparedStatement ps =  conn.prepareStatement(sql)){
+        try (Connection connPostgre = ConexionPostgreSQL.getInstancia().getConexion();
+             PreparedStatement psPostgre = connPostgre.prepareStatement(sql)) {
 
-            ps.executeQuery();
+            psPostgre.setInt(1, id_especialidad);
+            try (ResultSet rsPostgre = psPostgre.executeQuery()){
 
-            ps.setInt(1, id_especialidad);
+                System.out.println("\nPacientes que recibieron tratamientos de la especialidad: " + id_especialidad);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id_tratamiento");
+                try (Connection connMySQL = ConexionMySQL.getInstancia().getConexion();
+                    PreparedStatement psMySQL = connMySQL.prepareStatement(sql2)) {
+
+
+
+                    while (rsPostgre.next()) {
+                        int id_tratamiento = rsPostgre.getInt("id_tratamiento");
+                        System.out.println("El id de tratamiento es: " + id_tratamiento);
+
+                        psMySQL.setInt(1, id_tratamiento);
+                        try (ResultSet rsMySQL = psMySQL.executeQuery()) {
+                            boolean hayResultados = false;
+
+
+                            while (rsMySQL.next()) {
+                                hayResultados = true;
+
+                                String nombrePaciente = rsMySQL.getString("Nombre del paciente");
+                                String tratamiento = rsMySQL.getString("Tratamiento");
+
+                                System.out.println(nombrePaciente + ", " + tratamiento);
+                            }
+                            if (!hayResultados) {
+                                System.out.println("Ese tratamiento no tiene pacientes.");
+                            }
+                        }
+                    }
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Error al obtener ID del tratamiento por especialidad: " + e.getMessage());
+            System.err.println("Error al obtener el ID del Paciente: " + e.getMessage());
         }
-        return -1;
     }
 }
+
+
+
+

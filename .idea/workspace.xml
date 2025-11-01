@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="avanzando">
-      <change afterPath="$PROJECT_DIR$/src/DAO/FuncionesCombinadasDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/TratamientosMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TratamientosMySqlDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Programa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Programa.java" afterDir="false" />
@@ -108,7 +107,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761952654886</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="avanzando">
+      <option name="closed" value="true" />
+      <created>1761956870209</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1761956870209</updated>
+    </task>
+    <task id="LOCAL-00007" summary="avanzando">
+      <option name="closed" value="true" />
+      <created>1761957163074</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1761957163074</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

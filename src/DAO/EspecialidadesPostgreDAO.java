@@ -8,7 +8,6 @@ import java.util.List;
 
 public class EspecialidadesPostgreDAO{
 
-
     public void crear(EspecialidadesPostgre especialidadesPostgre) {
         String sql = "Insert Into hospital.especialidades (nombre_especialidad) Values (?)";
 

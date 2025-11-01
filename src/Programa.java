@@ -193,10 +193,12 @@ public class Programa {
 
 
     private static void obtenerPacientesPorEspecialidad() {
-        System.out.println("PENDIENTE");
+        mostrarEspecialidades();
+        int idEspecialidad = ValidarDatos.enteroCorrecto("Selecciona la especialidad: ",1 , Integer.MAX_VALUE);
+        obtenerPacientesPorEspecialidad(idEspecialidad);
     }
     private static void obtenerPacientesPorEspecialidad(int idEspecialidad) {
-        System.out.println("PENDIENTE");
+        TratamientosPostgreDAO.obtenerTratamientoPorEspecialidad(idEspecialidad);
     }
 
 
