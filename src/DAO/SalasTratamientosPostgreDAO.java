@@ -1,16 +1,11 @@
 package DAO;
 
-import Conexiones.ConexionMySQL;
 import Conexiones.ConexionPostgreSQL;
-import Modelo.CitasMySql;
-import Modelo.SalasTratamientosPostgre;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class SalasTratamientosPostgreDAO {
 

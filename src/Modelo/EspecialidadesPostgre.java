@@ -4,8 +4,7 @@ public class EspecialidadesPostgre {
     private int id_especialidad;
     private String nombre_especialidad;
 
-    public EspecialidadesPostgre() {
-    }
+
 
     public EspecialidadesPostgre(String nombre_especialidad) {
         this.nombre_especialidad = nombre_especialidad;

@@ -5,9 +5,6 @@ public class TratamientosPostgre {
     private int idMedico;
     private int idEspecialidad;
 
-    public TratamientosPostgre() {
-    }
-
     public TratamientosPostgre(int idMedico, int idEspecialidad) {
         this.idMedico = idMedico;
         this.idEspecialidad = idEspecialidad;
@@ -45,10 +42,6 @@ public class TratamientosPostgre {
 
     @Override
     public String toString() {
-        return "TratamientosPostgre{" +
-                "idTratamiento=" + idTratamiento +
-                ", idMedico=" + idMedico +
-                ", idEspecialidad=" + idEspecialidad +
-                '}';
+        return  "Id del Tratamiento.- " + idTratamiento + ", Id del Medico.- " + idMedico + ", Id de la Especialidad.- " + idEspecialidad;
     }
 }

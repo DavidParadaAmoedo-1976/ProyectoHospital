@@ -8,8 +8,6 @@ public class PacientesMySql {
     private String email;
     private LocalDate fechaNacimiento;
 
-    public PacientesMySql() {}
-
     public PacientesMySql(String nombre, String email, LocalDate fechaNacimiento) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;

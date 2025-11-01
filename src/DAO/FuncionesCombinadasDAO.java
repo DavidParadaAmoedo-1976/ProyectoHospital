@@ -15,18 +15,19 @@ public class FuncionesCombinadasDAO {
         System.out.println("\n*** Listado completo de tratamientos ***\n");
 
         String sqlPostgre = """
-            Select t.id_tratamiento, e.nombre_especialidad, m.nombre_medico
-            From hospital.tratamientos t
-            Join hospital.especialidades e ON t.id_especialidad = e.id_especialidad
-            Join hospital.medicos m ON t.id_medico = m.id_medico
-            Order By t.id_tratamiento;
-            """;
+                            select t.id_tratamiento, e.nombre_especialidad, m.nombre_medico
+                            from hospital.tratamientos t
+                            join hospital.especialidades e
+                            on t.id_especialidad = e.id_especialidad
+                            join hospital.medicos m ON t.id_medico = m.id_medico
+                            order by t.id_tratamiento;
+                            """;
 
         String sqlMySQL = """
-            Select id_tratamiento, nombre_tratamiento, descripcion
-            From tratamientos
-            Order By id_tratamiento;
-            """;
+                            select id_tratamiento, nombre_tratamiento, descripcion
+                            from tratamientos
+                            order by id_tratamiento;
+                            """;
 
         try (
                 Connection connPostgre = ConexionPostgreSQL.getInstancia().getConexion();

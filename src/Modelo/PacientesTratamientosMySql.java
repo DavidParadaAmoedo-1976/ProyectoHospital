@@ -7,9 +7,6 @@ public class PacientesTratamientosMySql {
     private int idTratamiento;
     private LocalDate fechaInicio;
 
-    public PacientesTratamientosMySql() {
-    }
-
     public PacientesTratamientosMySql(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
@@ -46,10 +43,6 @@ public class PacientesTratamientosMySql {
 
     @Override
     public String toString() {
-        return "PacienteTratamientoMySql{" +
-                "idPaciente=" + idPaciente +
-                ", idTratamiento=" + idTratamiento +
-                ", fechaInicio=" + fechaInicio +
-                '}';
+        return  "Id del Paciente.- " + idPaciente + ", Id del Tratamiento.- " + idTratamiento +", fechaInicio: " + fechaInicio;
     }
 }

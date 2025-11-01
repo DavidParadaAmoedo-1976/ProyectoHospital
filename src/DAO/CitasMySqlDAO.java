@@ -2,16 +2,14 @@ package DAO;
 
 import Conexiones.ConexionMySQL;
 import Modelo.CitasMySql;
-
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CitasMySqlDAO {
-
+/*
     public void crear(CitasMySql cita) {
-        String sql = "INSERT INTO citas (id_paciente, fecha) VALUES (?, ?)";
+        String sql = "insert into citas (id_paciente, fecha) values (?, ?)";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -28,7 +26,7 @@ public class CitasMySqlDAO {
 
     public List<CitasMySql> leerTodos() {
         List<CitasMySql> citas = new ArrayList<>();
-        String sql = "SELECT id_cita, id_paciente, fecha FROM citas";
+        String sql = "select id_cita, id_paciente, fecha from citas";
 
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              Statement st = conn.createStatement();
@@ -51,7 +49,7 @@ public class CitasMySqlDAO {
     }
 
     public void eliminar(int id) {
-        String sql = "DELETE FROM citas WHERE id_cita = ?";
+        String sql = "delete from citas where id_cita = ?";
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -67,28 +65,28 @@ public class CitasMySqlDAO {
             System.err.println("Error al eliminar la cita: " + e.getMessage());
         }
     }
-
+*/
     public static void totalCitasPorPaciente() {
         String sql = """
-                SELECT paciente.nombre as nombre_paciente, COUNT(cont.id_cita) AS total_citas
-                                FROM pacientes paciente
-                                LEFT JOIN citas cont ON paciente.id_paciente = cont.id_paciente
-                                GROUP BY paciente.id_paciente, paciente.nombre
-                                ORDER BY total_citas DESC;
-            """;
+                    select paciente.nombre as nombre_paciente, count(cont.id_cita) as total_citas
+                    from pacientes paciente
+                    left join citas cont on paciente.id_paciente = cont.id_paciente
+                    group by paciente.id_paciente, paciente.nombre
+                    order by total_citas desc;
+                    """;
 
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
 
             System.out.println("\n*** Total de citas por paciente ***");
+            System.out.print("\nNombre del paciente \tNº de citas");
             while (rs.next()) {
-                System.out.printf("\n" + rs.getString("nombre_paciente") + "\t" + rs.getInt("total_citas"));
+                System.out.printf("\n%-20s -> \t%-5d", rs.getString("nombre_paciente") , rs.getInt("total_citas"));
             }
 
         } catch (SQLException e) {
             System.err.println("Error al obtener total de citas: " + e.getMessage());
         }
     }
-
 }

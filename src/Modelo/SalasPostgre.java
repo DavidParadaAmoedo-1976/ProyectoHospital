@@ -5,10 +5,6 @@ public class SalasPostgre {
     private  String nombreSala;
     private  String ubicacion;
 
-
-    public SalasPostgre() {
-    }
-
     public SalasPostgre(String nombreSala, String ubicacion) {
         this.nombreSala = nombreSala;
         this.ubicacion = ubicacion;
@@ -46,10 +42,6 @@ public class SalasPostgre {
 
     @Override
     public String toString() {
-        return "SalaPostgre{" +
-                "idSala=" + idSala +
-                ", nombreSala='" + nombreSala + '\'' +
-                ", ubicacion='" + ubicacion + '\'' +
-                '}';
+        return "Id de la Sala.- " + idSala + ", Nombre de la Sala: " + nombreSala + ", Ubicación: " + ubicacion;
     }
 }

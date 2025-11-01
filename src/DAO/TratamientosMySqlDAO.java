@@ -26,32 +26,46 @@ public class TratamientosMySqlDAO {
             System.err.println("Error al insertar tratamiento en MySQL: " + e.getMessage());
         }
     }
-
-    public List<TratamientosMySql> leerTodos() {
-        List<TratamientosMySql> lista = new ArrayList<>();
+/*
+    public static void leerTodos() {
         String sql = """
-                   SELECT id_tratamiento, nombre_tratamiento, descripcion
-                   FROM tratamientos
-                   ORDER BY id_tratamiento
-                """;
+                    select id_tratamiento, nombre_tratamiento, descripcion
+                    from tratamientos
+                    order by id_tratamiento
+                    """;
 
         try (Connection conn = ConexionMySQL.getInstancia().getConexion();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
-                lista.add(new TratamientosMySql(
-                        rs.getInt("id_tratamiento"),
-                        rs.getString("nombre_tratamiento"),
-                        rs.getString("descripcion")
-                ));
+                System.out.println(rs.getInt("id_tratamiento") + rs.getString("nombre_tratamiento") + rs.getString("descripcion"));
             }
 
         } catch (SQLException e) {
             System.err.println("Error al listar los tratamientos: " + e.getMessage());
         }
+    }
+ */
 
-        return lista;
+    public static void leerTodosReducido() {
+        String sql = """
+                    select id_tratamiento, nombre_tratamiento
+                    from tratamientos
+                    order by id_tratamiento
+                    """;
+
+        try (Connection conn = ConexionMySQL.getInstancia().getConexion();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            System.out.println("\n\t*** Lista de tratamientos ***");
+            while (rs.next()) {
+                System.out.println("Id.- " +rs.getInt("id_tratamiento") + "\t->\t" + rs.getString("nombre_tratamiento"));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al listar los tratamientos: " + e.getMessage());
+        }
     }
 
     public void eliminar(int id) {

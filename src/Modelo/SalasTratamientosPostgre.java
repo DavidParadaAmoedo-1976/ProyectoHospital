@@ -4,9 +4,6 @@ public class SalasTratamientosPostgre {
     private int idSala;
     private int idTratamiento;
 
-    public SalasTratamientosPostgre() {
-    }
-
     public SalasTratamientosPostgre(int idSala, int idTratamiento) {
         this.idSala = idSala;
         this.idTratamiento = idTratamiento;
@@ -30,9 +27,6 @@ public class SalasTratamientosPostgre {
 
     @Override
     public String toString() {
-        return "SalasTratamientosPostgre{" +
-                "idSala=" + idSala +
-                ", idTratamiento=" + idTratamiento +
-                '}';
+        return "Id de la Sala.- " + idSala + ", Id del Tratamiento.- " + idTratamiento;
     }
 }

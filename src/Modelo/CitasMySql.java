@@ -7,8 +7,7 @@ public class CitasMySql {
     private int idPaciente;
     private LocalDate fecha;
 
-    public CitasMySql() {
-    }
+
 
     public CitasMySql(int idCita, int idPaciente, LocalDate fecha) {
         this.idCita = idCita;

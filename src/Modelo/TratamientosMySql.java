@@ -5,9 +5,6 @@ public class TratamientosMySql {
     private String nombreTratamiento;
     private String descripcion;
 
-    public TratamientosMySql() {
-    }
-
     public TratamientosMySql(String nombreTratamiento, String descripcion) {
         this.nombreTratamiento = nombreTratamiento;
         this.descripcion = descripcion;
@@ -45,10 +42,6 @@ public class TratamientosMySql {
 
     @Override
     public String toString() {
-        return "TratamientoMySql{" +
-                "idTratamiento=" + idTratamiento +
-                ", nombreTratamiento='" + nombreTratamiento + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                '}';
+        return  "Id del Tratamiento.- " + idTratamiento + ", Nombre del Tratamiento.- " + nombreTratamiento + ", Descripcion: " + descripcion;
     }
 }

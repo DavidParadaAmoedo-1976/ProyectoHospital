@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class TratamientosPostgreDAO {
 
     public int crear(TratamientosPostgre tratamiento) {
-        String sql = "INSERT INTO hospital.tratamientos (id_medico, id_especialidad) VALUES (?, ?) RETURNING id_tratamiento";
+        String sql = "insert into hospital.tratamientos (id_medico, id_especialidad) values (?, ?) returning id_tratamiento";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -33,7 +33,7 @@ public class TratamientosPostgreDAO {
     }
 
     public void eliminar(int id) {
-        String sql = "DELETE FROM hospital.tratamientos WHERE id_tratamiento = ?";
+        String sql = "delete from hospital.tratamientos where id_tratamiento = ?";
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -51,15 +51,15 @@ public class TratamientosPostgreDAO {
     }
 
     public static void obtenerTratamientoPorEspecialidad(int id_especialidad) {
-        String sql = "Select id_tratamiento From hospital.tratamientos Where id_especialidad = ?;";
+        String sql = "select id_tratamiento from hospital.tratamientos where id_especialidad = ?;";
         String sql2 = """
-                Select p.nombre As "Nombre del Paciente", t.nombre_tratamiento As Tratamiento
-                From pacientes p
-                Join pacientes_tratamientos pt
-                On p.id_paciente = pt.id_paciente
-                Join tratamientos  t
-                On t.id_tratamiento = pt.id_Tratamiento
-                Where t.id_tratamiento = ?
+                select p.nombre As "Nombre del Paciente", t.nombre_tratamiento as Tratamiento
+                from pacientes p
+                join pacientes_tratamientos pt
+                on p.id_paciente = pt.id_paciente
+                join tratamientos  t
+                on t.id_tratamiento = pt.id_Tratamiento
+                where t.id_tratamiento = ?
                 """;
 
         try (Connection connPostgre = ConexionPostgreSQL.getInstancia().getConexion();
@@ -68,28 +68,23 @@ public class TratamientosPostgreDAO {
             psPostgre.setInt(1, id_especialidad);
             try (ResultSet rsPostgre = psPostgre.executeQuery()){
 
-                System.out.println("\nPacientes que recibieron tratamientos de la especialidad: " + id_especialidad);
-
                 try (Connection connMySQL = ConexionMySQL.getInstancia().getConexion();
                     PreparedStatement psMySQL = connMySQL.prepareStatement(sql2)) {
 
-
-
+                    System.out.print("\nPacientes que recibieron tratamientos de la especialidad: " + id_especialidad);
                     while (rsPostgre.next()) {
                         int id_tratamiento = rsPostgre.getInt("id_tratamiento");
-                        System.out.println("El id de tratamiento es: " + id_tratamiento);
+                        System.out.println("\nEl id de tratamiento es: " + id_tratamiento);
 
                         psMySQL.setInt(1, id_tratamiento);
                         try (ResultSet rsMySQL = psMySQL.executeQuery()) {
                             boolean hayResultados = false;
-
 
                             while (rsMySQL.next()) {
                                 hayResultados = true;
 
                                 String nombrePaciente = rsMySQL.getString("Nombre del paciente");
                                 String tratamiento = rsMySQL.getString("Tratamiento");
-
                                 System.out.println(nombrePaciente + ", " + tratamiento);
                             }
                             if (!hayResultados) {

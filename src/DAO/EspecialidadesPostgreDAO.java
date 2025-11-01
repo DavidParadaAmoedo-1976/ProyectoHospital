@@ -3,13 +3,11 @@ package DAO;
 import Conexiones.ConexionPostgreSQL;
 import Modelo.EspecialidadesPostgre;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EspecialidadesPostgreDAO{
 
     public void crear(EspecialidadesPostgre especialidadesPostgre) {
-        String sql = "Insert Into hospital.especialidades (nombre_especialidad) Values (?)";
+        String sql = "insert into hospital.especialidades (nombre_especialidad) values (?)";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -24,29 +22,24 @@ public class EspecialidadesPostgreDAO{
         }
     }
 
-    public List<EspecialidadesPostgre> leerTodos() {
-        List<EspecialidadesPostgre> lista = new ArrayList<>();
-        String sql = "Select id_especialidad, nombre_especialidad From hospital.especialidades";
+    public static void leerTodos() {
+        String sql = "select id_especialidad, nombre_especialidad from hospital.especialidades";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
-
+            System.out.println("\n  *** Mostrando las especialidades disponibles ***");
             while (rs.next()) {
-                EspecialidadesPostgre especialidadesPostgre = new EspecialidadesPostgre(
-                        rs.getInt("id_especialidad"),
-                        rs.getString("nombre_especialidad")
+                System.out.println("ID.- " + rs.getInt("id_especialidad") + "\t->\t " + rs.getString("nombre_especialidad")
                 );
-                lista.add(especialidadesPostgre);
             }
         } catch (SQLException e) {
             System.err.println("Error al leer las especialidades: " + e.getMessage());
         }
-        return lista;
     }
 
     public int obtenerIdPorNombre(String nombre) {
-        String sql = "Select id_especialidad From hospital.especialidades Where nombre_especialidad = ?";
+        String sql = "select id_especialidad from hospital.especialidades where nombre_especialidad = ?";
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, nombre);

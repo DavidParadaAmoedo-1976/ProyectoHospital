@@ -9,8 +9,8 @@ import java.util.List;
 public class MedicosPostgreDAO{
 
     public void crear(MedicosPostgre medico) {
-        String sql = "Insert Into hospital.medicos (nombre_medico, contacto)" +
-                     "Values (?, ROW(?, ?, ?, ?)::hospital.contacto_medico);";
+        String sql = "insert into hospital.medicos (nombre_medico, contacto)" +
+                     "values (?, row(?, ?, ?, ?)::hospital.contacto_medico);";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -29,37 +29,55 @@ public class MedicosPostgreDAO{
         }
     }
 
-    public List<MedicosPostgre> leerTodos() {
-        List<MedicosPostgre> lista = new ArrayList<>();
+    public static void leerTodos() {
         String sql = """
-                        Select id_medico, nombre_medico, (contacto).nombre_contacto AS "Nombre de contacto",
-                               (contacto).nif AS NIF, (contacto).telefono AS Telefono, (contacto).email AS Email
-                        From hospital.medicos
-                        Order By id_medico
-                     """;
+                    select id_medico, nombre_medico, (contacto).nombre_contacto as "Nombre de contacto",
+                    (contacto).nif as NIF, (contacto).telefono as Telefono, (contacto).email as Email
+                    from hospital.medicos
+                    order by id_medico
+                    """;
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
 
+            System.out.println("\n  *** Mostrando los médicos disponibles ***");
             while (rs.next()) {
-                lista.add(new MedicosPostgre(
-                        rs.getInt("id_medico"),
-                        rs.getString("nombre_medico"),
-                        rs.getString("Nombre de contacto"),
-                        rs.getString("NIF"),
-                        rs.getString("Telefono"),
-                        rs.getString("Email")
-                ));
+                System.out.println(rs.getInt("id_medico") +
+                        rs.getString("nombre_medico") +
+                        rs.getString("Nombre de contacto") +
+                        rs.getString("NIF") +
+                        rs.getString("Telefono") +
+                        rs.getString("Email"));
             }
         } catch (SQLException e) {
             System.err.println("Error al listar médicos: " + e.getMessage());
         }
-        return lista;
+    }
+
+    public static void leerTodosReducido() {
+        String sql = """
+                    select id_medico, nombre_medico
+                    from hospital.medicos
+                    order by id_medico
+                    """;
+
+        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            System.out.println("\n  *** Mostrando los médicos disponibles ***");
+            while (rs.next()) {
+                System.out.println("Id.- " + rs.getInt("id_medico") + " \t->\t" +
+                        rs.getString("nombre_medico"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar médicos: " + e.getMessage());
+        }
     }
 
     public void eliminar(int id) {
-        String sql = "Delete From hospital.medicos Where id_medico = ?";
+        String sql = "delete from hospital.medicos where id_medico = ?";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -78,7 +96,7 @@ public class MedicosPostgreDAO{
     }
 
     public int obtenerIdPorNif(String nif) {
-        String sql = " Select id_medico From hospital.medicos Where (contacto).nif = ?";
+        String sql = " select id_medico from hospital.medicos where (contacto).nif = ?";
 
         int id = -1;
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();

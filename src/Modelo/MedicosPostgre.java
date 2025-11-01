@@ -8,8 +8,6 @@ public class MedicosPostgre {
     private String telefono;
     private String email;
 
-    public MedicosPostgre() {}
-
     public MedicosPostgre(int idMedico, String nombre, String nombreContacto, String nif, String telefono, String email) {
         this.idMedico = idMedico;
         this.nombre = nombre;

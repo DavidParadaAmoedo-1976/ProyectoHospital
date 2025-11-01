@@ -66,7 +66,7 @@ public class Programa {
     }
 
     private static void eliminarMedico() {
-        if (mostrarMedicos()) return;
+        MedicosPostgreDAO.leerTodosReducido();
         int idMedico = ValidarDatos.enteroCorrecto("\nIntroduce el ID del medico: ", 1, Integer.MAX_VALUE);
 
         eliminarMedico(idMedico);
@@ -111,10 +111,10 @@ public class Programa {
         System.out.print("Introduce la descripción del tratamiento: ");
         String descripcion = sc.nextLine();
 
-        if (mostrarEspecialidades()) return;
+        EspecialidadesPostgreDAO.leerTodos();
         int idEspecialidad = ValidarDatos.enteroCorrecto("Elige el ID de la especialidad: ", 1, Integer.MAX_VALUE);
 
-        mostrarMedicos();
+        MedicosPostgreDAO.leerTodosReducido();
         int idMedico = ValidarDatos.enteroCorrecto("Elige el ID del médico: ", 1, Integer.MAX_VALUE);
 
         crearTratamientoComun(nombre, descripcion, idEspecialidad, idMedico);
@@ -146,7 +146,7 @@ public class Programa {
     }
 
     private static void eliminarTratamientoPorNombre() {
-        if (mostrarTratamientos()) return;
+        TratamientosMySqlDAO.leerTodosReducido();
         String nombreTratamiento = ValidarDatos.leerNombre("tratamiento");
         eliminarTratamientoPorNombre(nombreTratamiento);
     }
@@ -190,8 +190,8 @@ public class Programa {
     }
 
     private static void obtenerPacientesPorEspecialidad() {
-        mostrarEspecialidades();
-        int idEspecialidad = ValidarDatos.enteroCorrecto("Selecciona la especialidad: ",1 , Integer.MAX_VALUE);
+        EspecialidadesPostgreDAO.leerTodos();
+        int idEspecialidad = ValidarDatos.enteroCorrecto("\nSelecciona la especialidad: ",1 , Integer.MAX_VALUE);
         obtenerPacientesPorEspecialidad(idEspecialidad);
     }
     private static void obtenerPacientesPorEspecialidad(int idEspecialidad) {
@@ -210,22 +210,7 @@ public class Programa {
         return false;
     }
 
-    private static boolean mostrarEspecialidades() {
-        EspecialidadesPostgreDAO especialidadesPostgreDAO = new EspecialidadesPostgreDAO();
-        List<EspecialidadesPostgre> especialidades = especialidadesPostgreDAO.leerTodos();
-
-        if (especialidades.isEmpty()) {
-            System.out.println("No hay especialidades registradas.");
-            return true;
-        }
-
-        System.out.println("\n*** Especialidades disponibles ***");
-        for (EspecialidadesPostgre esp : especialidades) {
-            System.out.println("ID.- " + esp.getId_especialidad() + " - " + esp.getNombre_especialidad());
-        }
-        return false;
-    }
-
+/*
     private static boolean mostrarMedicos() {
         MedicosPostgreDAO medicosPostgreDAO = new MedicosPostgreDAO();
         List<MedicosPostgre> medicos = medicosPostgreDAO.leerTodos();
@@ -241,6 +226,7 @@ public class Programa {
         return false;
     }
 
+
     private static boolean mostrarTratamientos() {
         TratamientosMySqlDAO tratamientosMySqlDAO = new TratamientosMySqlDAO();
         List<TratamientosMySql> tratamientos = tratamientosMySqlDAO.leerTodos();
@@ -254,7 +240,7 @@ public class Programa {
         }
         return false;
     }
-
+*/
     private static void crearTratamientoComun(String nombre, String descripcion, int idEspecialidad, int idMedico) {
         TratamientosPostgreDAO tratamientosPostgreDAO = new TratamientosPostgreDAO();
         TratamientosMySqlDAO tratamientosMySqlDAO = new TratamientosMySqlDAO();
@@ -277,21 +263,24 @@ public class Programa {
     }
 
     private static void mostrarMenu() {
-        System.out.print("\n\n\t\t\t===== MENU HOSPITAL =====\n" +
-                "\n\t 1.- Crear una nueva especialidad médica.\n" +
-                "\t 2.- Crear un nuevo médico.\n" +
-                "\t 3.- Eliminar un médico por ID.\n" +
-                "\t 4.- Crear un nuevo paciente.\n" +
-                "\t 5.- Eliminar un paciente.\n" +
-                "\t 6.- Crear nuevo tratamiento (nombre, descripción, especialidad, médico).\n" +
-                "\t 7.- Eliminar un tratamiento por su nombre.\n" +
-                "\t 8.- Listar tratamientos (menos de X pacientes asignados).\n" +
-                "\t 9.- Obtener el total de citas realizadas por cada paciente.\n" +
-                "\t10.- Obtener la cantidad de tratamientos por sala.\n" +
-                "\t11.- Listar todos los tratamientos con sus respectivas especalidades y médicos (MySQL + PostgreSQL)\n" +
-                "\t12.- Obtener todos los pacientes que han recibido un tratamiento de una especialidad dada (MySQL + PostgreSQL).\n" +
-                "\t 0.- Salir.\n" +
-                "\nElige una opción: ");
+        System.out.print("""
+                \t\t\t===== MENU HOSPITAL =====
+                
+                \t 1.- Crear una nueva especialidad médica.
+                \t 2.- Crear un nuevo médico.
+                \t 3.- Eliminar un médico por ID.
+                \t 4.- Crear un nuevo paciente.
+                \t 5.- Eliminar un paciente.
+                \t 6.- Crear nuevo tratamiento.
+                \t 7.- Eliminar un tratamiento por su nombre.
+                \t 8.- Listar tratamientos (menos de X pacientes asignados).
+                \t 9.- Obtener el total de citas realizadas por cada paciente.
+                \t10.- Obtener la cantidad de tratamientos por sala.
+                \t11.- Listar todos los tratamientos con sus respectivas especalidades y médicos.
+                \t12.- Obtener todos los pacientes que han recibido un tratamiento de una especialidad dada.
+                \t 0.- Salir.
+                
+                Elige una opción:\s""");
     }
 
     private static void Salir() {
