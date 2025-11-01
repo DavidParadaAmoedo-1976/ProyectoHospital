@@ -9,8 +9,8 @@ import java.util.List;
 public class MedicosPostgreDAO{
 
     public void crear(MedicosPostgre medico) {
-        String sql = "INSERT INTO hospital.medicos (nombre_medico, contacto)" +
-                     "VALUES (?, ROW(?, ?, ?, ?)::hospital.contacto_medico)";
+        String sql = "Insert Into hospital.medicos (nombre_medico, contacto)" +
+                     "Values (?, ROW(?, ?, ?, ?)::hospital.contacto_medico);";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -32,14 +32,10 @@ public class MedicosPostgreDAO{
     public List<MedicosPostgre> leerTodos() {
         List<MedicosPostgre> lista = new ArrayList<>();
         String sql = """
-                        SELECT id_medico,
-                               nombre_medico,
-                               (contacto).nombre_contacto AS nombre_contacto,
-                               (contacto).nif AS nif,
-                               (contacto).telefono AS telefono,
-                               (contacto).email AS email
-                        FROM hospital.medicos
-                        ORDER BY id_medico
+                        Select id_medico, nombre_medico, (contacto).nombre_contacto AS "Nombre de contacto",
+                               (contacto).nif AS NIF, (contacto).telefono AS Telefono, (contacto).email AS Email
+                        From hospital.medicos
+                        Order By id_medico
                      """;
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
@@ -50,22 +46,20 @@ public class MedicosPostgreDAO{
                 lista.add(new MedicosPostgre(
                         rs.getInt("id_medico"),
                         rs.getString("nombre_medico"),
-                        rs.getString("nombre_contacto"),
-                        rs.getString("nif"),
-                        rs.getString("telefono"),
-                        rs.getString("email")
+                        rs.getString("Nombre de contacto"),
+                        rs.getString("NIF"),
+                        rs.getString("Telefono"),
+                        rs.getString("Email")
                 ));
             }
-
         } catch (SQLException e) {
             System.err.println("Error al listar médicos: " + e.getMessage());
         }
-
         return lista;
     }
 
     public void eliminar(int id) {
-        String sql = "DELETE FROM hospital.medicos WHERE id_medico = ?";
+        String sql = "Delete From hospital.medicos Where id_medico = ?";
 
         try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {

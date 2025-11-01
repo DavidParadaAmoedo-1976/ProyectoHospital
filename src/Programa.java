@@ -3,10 +3,7 @@ import Conexiones.ConexionPostgreSQL;
 import DAO.*;
 import Modelo.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -33,11 +30,11 @@ public class Programa {
                 case 5 -> eliminarPaciente();
                 case 6 -> crearTratamiento();
                 case 7 -> eliminarTratamientoPorNombre();
-                case 8 -> listarTratamientoPorMaximoDePacientes();
+                case 8 -> listarTratamientosConPocosPacientes();
                 case 9 -> listarCitasPorPaciente();
                 case 10 -> obtenerCantidadTratamientosPorSala();
-                case 11 -> listarTratamientosConEspecialidadesYMedicos();
-                case 12 -> ListarPacientesPorTratamientoYEspecialidad();
+                case 11 -> listarTratamientosConEspecialidadYMedicos();
+                case 12 -> obtenerPacientesPorEspecialidad();
                 case 0 -> Salir();
             }
         }
@@ -148,125 +145,71 @@ public class Programa {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private static void ListarPacientesPorTratamientoYEspecialidad() {
-        System.out.println("PENDIENTE");
-    }
-
-    private static void listarTratamientosConEspecialidadesYMedicos() {
-
-        System.out.println("\n*** Listado completo de tratamientos ***\n");
-
-        String sqlPostgre = """
-            SELECT 
-                t.id_tratamiento,
-                e.nombre_especialidad,
-                m.nombre_medico
-            FROM hospital.tratamientos t
-            JOIN hospital.especialidades e ON t.id_especialidad = e.id_especialidad
-            JOIN hospital.medicos m ON t.id_medico = m.id_medico
-            ORDER BY t.id_tratamiento;
-            """;
-
-        String sqlMySQL = """
-            SELECT 
-                id_tratamiento,
-                nombre_tratamiento,
-                descripcion
-            FROM tratamientos
-            ORDER BY id_tratamiento;
-            """;
-
-        try (
-                Connection connPostgre = ConexionPostgreSQL.getInstancia().getConexion();
-                Statement stPostgre = connPostgre.createStatement();
-                ResultSet rsPostgre = stPostgre.executeQuery(sqlPostgre);
-
-                Connection connMySQL = ConexionMySQL.getInstancia().getConexion();
-                Statement stMySQL = connMySQL.createStatement();
-                ResultSet rsMySQL = stMySQL.executeQuery(sqlMySQL)
-        ) {
-
-            while (rsPostgre.next() && rsMySQL.next()) {
-                int idTratamientoPostgre = rsPostgre.getInt("id_tratamiento");
-                int idTratamientoMysql = rsMySQL.getInt(("id_tratamiento"));
-
-                if (idTratamientoMysql == idTratamientoPostgre) {
-                    String nombre = rsMySQL.getString("nombre_tratamiento");
-                    String descripcion = rsMySQL.getString("descripcion");
-                    String especialidad = rsPostgre.getString("nombre_especialidad");
-                    String medico = rsPostgre.getString("nombre_medico");
-
-                    System.out.printf("\n          ID: " + idTratamientoMysql +
-                            "\n Tratamiento: " + nombre +
-                            "\n Descripción: " + descripcion +
-                            "\nEspecialidad: " + especialidad +
-                            "\n      Médico: " + medico +
-                            "\n-------------------------------------------");
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Error al listar tratamientos combinados: " + e.getMessage());
-        }
-    }
-
-
-    private static void obtenerCantidadTratamientosPorSala() {
-
-        SalasTratamientosPostgreDAO.listarTratamientosPorSala();
-    }
-
-    private static void listarCitasPorPaciente() {
-
-        CitasMySqlDAO.totalCitasPorPaciente();
-    }
-
-    private static void listarTratamientoPorMaximoDePacientes() {
-        int numeroDePacientes = ValidarDatos.enteroCorrecto("Introduce el limite de pacientes para la busqueda: ",1,Integer.MAX_VALUE );
-        PacientesTratamientosMySqlDAO pacientesTratamientosMySqlDAO = new PacientesTratamientosMySqlDAO();
-        pacientesTratamientosMySqlDAO.tratamientoPorNumeroPacientes(numeroDePacientes);
-
-
-    }
-
     private static void eliminarTratamientoPorNombre() {
         if (mostrarTratamientos()) return;
         String nombreTratamiento = ValidarDatos.leerNombre("tratamiento");
+        eliminarTratamientoPorNombre(nombreTratamiento);
+    }
+
+    private static void eliminarTratamientoPorNombre(String nombre) {
         TratamientosMySqlDAO mySqlDAO = new TratamientosMySqlDAO();
         TratamientosPostgreDAO postgreDAO = new TratamientosPostgreDAO();
 
-        int idTratamiento = mySqlDAO.obtenerIdPorNombre(nombreTratamiento);
+        int idTratamiento = mySqlDAO.obtenerIdPorNombre(nombre);
 
         if (idTratamiento != -1) {
             mySqlDAO.eliminar(idTratamiento);
             postgreDAO.eliminar(idTratamiento);
             System.out.println("Tratamiento eliminado correctamente de ambas bases de datos.");
 
-
         } else {
-            System.out.println("No se encontró ningún tratamiento con el nombre " + nombreTratamiento + ".");
+            System.out.println("No se encontró ningún tratamiento con el nombre " + nombre + ".");
         }
     }
+
+    private static void listarTratamientosConPocosPacientes() {
+        int numeroDePacientes = ValidarDatos.enteroCorrecto("Introduce el limite de pacientes para la busqueda: ",1,Integer.MAX_VALUE );
+        listarTratamientosConPocosPacientes(numeroDePacientes);
+    }
+
+    private static void listarTratamientosConPocosPacientes(int cantidad) {
+        PacientesTratamientosMySqlDAO pacientesTratamientosMySqlDAO = new PacientesTratamientosMySqlDAO();
+        pacientesTratamientosMySqlDAO.tratamientoPorNumeroPacientes(cantidad);
+    }
+
+    private static void listarCitasPorPaciente() {
+        CitasMySqlDAO.totalCitasPorPaciente();
+    }
+
+    private static void obtenerCantidadTratamientosPorSala() {
+        SalasTratamientosPostgreDAO.listarTratamientosPorSala();
+    }
+
+    private static void listarTratamientosConEspecialidadYMedicos() {
+        FuncionesCombinadasDAO.listarTratamientosConEspecialidadesYMedicos();
+    }
+
+
+
+
+    private static void obtenerPacientesPorEspecialidad() {
+        System.out.println("PENDIENTE");
+    }
+    private static void obtenerPacientesPorEspecialidad(int idEspecialidad) {
+        System.out.println("PENDIENTE");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

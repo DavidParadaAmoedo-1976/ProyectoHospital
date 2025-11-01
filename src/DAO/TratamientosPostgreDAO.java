@@ -2,12 +2,10 @@ package DAO;
 
 import Conexiones.ConexionPostgreSQL;
 import Modelo.TratamientosPostgre;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class TratamientosPostgreDAO {
 
@@ -50,4 +48,25 @@ public class TratamientosPostgreDAO {
         }
     }
 
+    public int obtenerIdTratamientoPorEspecialidad(){
+        String sql = "Select id_tratamiento From hospital.tratamientos Where id_especialidad = ?;";
+        int id_especialidad = -1;
+
+        try (Connection conn = ConexionPostgreSQL.getInstancia().getConexion();
+             PreparedStatement ps =  conn.prepareStatement(sql)){
+
+            ps.executeQuery();
+
+            ps.setInt(1, id_especialidad);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_tratamiento");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener ID del tratamiento por especialidad: " + e.getMessage());
+        }
+        return -1;
+    }
 }
