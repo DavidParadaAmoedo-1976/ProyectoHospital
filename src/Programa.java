@@ -31,9 +31,9 @@ public class Programa {
                 case 6 -> crearTratamiento();
                 case 7 -> eliminarTratamientoPorNombre();
                 case 8 -> listarTratamientosConPocosPacientes();
-                case 9 -> listarCitasPorPaciente();
+                case 9 -> obtenerCitasPorPaciente();
                 case 10 -> obtenerCantidadTratamientosPorSala();
-                case 11 -> listarTratamientosConEspecialidadYMedicos();
+                case 11 -> listarTratamientosConEspecialidadYMedico();
                 case 12 -> obtenerPacientesPorEspecialidad();
                 case 0 -> Salir();
             }
@@ -177,7 +177,7 @@ public class Programa {
         pacientesTratamientosMySqlDAO.tratamientoPorNumeroPacientes(cantidad);
     }
 
-    private static void listarCitasPorPaciente() {
+    private static void obtenerCitasPorPaciente() {
         CitasMySqlDAO.totalCitasPorPaciente();
     }
 
@@ -185,12 +185,9 @@ public class Programa {
         SalasTratamientosPostgreDAO.listarTratamientosPorSala();
     }
 
-    private static void listarTratamientosConEspecialidadYMedicos() {
+    private static void listarTratamientosConEspecialidadYMedico() {
         FuncionesCombinadasDAO.listarTratamientosConEspecialidadesYMedicos();
     }
-
-
-
 
     private static void obtenerPacientesPorEspecialidad() {
         mostrarEspecialidades();
@@ -200,30 +197,6 @@ public class Programa {
     private static void obtenerPacientesPorEspecialidad(int idEspecialidad) {
         TratamientosPostgreDAO.obtenerTratamientoPorEspecialidad(idEspecialidad);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private static boolean mostrarPacientes() {
         PacientesMySqlDAO pacientesMySqlDAO = new PacientesMySqlDAO();
