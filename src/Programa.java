@@ -58,8 +58,6 @@ public class Programa {
         MedicosPostgreDAO.crear(new MedicosPostgre(nombreMedico, nombreContacto, nif, telefono, email));
     }
 
-
-
     static void crearMedico(String nombreMedico, String nif, String telefono, String email){
         MedicosPostgreDAO medicoDAO = new MedicosPostgreDAO();
         medicoDAO.crear(new MedicosPostgre(nombreMedico, nif, telefono, email));
