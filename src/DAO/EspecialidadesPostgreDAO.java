@@ -15,7 +15,7 @@ public class EspecialidadesPostgreDAO{
             ps.setString(1, especialidadesPostgre.getNombre_especialidad());
 
             ps.executeUpdate();
-            System.out.println("Especialñidad insertada correctamente en PostgreSQL.");
+            System.out.println("Especialidad insertada correctamente en PostgreSQL.");
 
         } catch (SQLException e) {
             System.err.println("Error al insertar especialidad: " + e.getMessage());

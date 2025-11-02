@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="Cambios esteticos">
+    <list default="true" id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="1ª revisión a fondo">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_jupiter_5_10_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/CitasMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/CitasMySqlDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProyectoAccesoADatos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoAccesoADatos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/EspecialidadesPostgreDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/FuncionesCombinadasDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/FuncionesCombinadasDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/MedicosPostgreDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PacientesMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PacientesMySqlDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PacientesTratamientosMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PacientesTratamientosMySqlDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/SalasTratamientosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/SalasTratamientosPostgreDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/TratamientosMySqlDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TratamientosMySqlDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TratamientosPostgreDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Programa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Programa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +33,12 @@
     &quot;assignee&quot;: &quot;DavidParadaAmoedo-1976&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/DavidParadaAmoedo-1976/ProyectoHospital.git",
-    "accountId": "65d96132-26bd-4743-a5d6-5fe351be16c1"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DavidParadaAmoedo-1976/ProyectoHospital.git&quot;,
+    &quot;accountId&quot;: &quot;65d96132-26bd-4743-a5d6-5fe351be16c1&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -51,19 +47,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Programa.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Programa.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="05300d79-08be-4074-8107-c2c3812864d3" name="Changes" comment="" />
@@ -152,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762017371860</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="1ª revisión a fondo">
+      <option name="closed" value="true" />
+      <created>1762021841788</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1762021841788</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -160,6 +170,7 @@
     <MESSAGE value="eliminar configuraciones y evitarlas" />
     <MESSAGE value="avanzando" />
     <MESSAGE value="Cambios esteticos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambios esteticos" />
+    <MESSAGE value="1ª revisión a fondo" />
+    <option name="LAST_COMMIT_MESSAGE" value="1ª revisión a fondo" />
   </component>
 </project>

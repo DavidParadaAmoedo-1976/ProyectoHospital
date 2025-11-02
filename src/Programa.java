@@ -29,7 +29,7 @@ public class Programa {
                 case 6 -> crearTratamiento();
                 case 7 -> eliminarTratamientoPorNombre();
                 case 8 -> listarTratamientosConPocosPacientes();
-                case 9 -> obtenerCitasPorPaciente();
+                case 9 -> obtenerTotalCitasPorPaciente();
                 case 10 -> obtenerCantidadTratamientosPorSala();
                 case 11 -> listarTratamientosConEspecialidadYMedico();
                 case 12 -> obtenerPacientesPorEspecialidad();
@@ -43,7 +43,7 @@ public class Programa {
 
         crearEspecialidad((nombreEspecialidad));
     }
-    private static void crearEspecialidad(String nombreEspecialidad){
+    static void crearEspecialidad(String nombreEspecialidad){
         EspecialidadesPostgreDAO especialidadesDAO = new EspecialidadesPostgreDAO();
         especialidadesDAO.crear(new EspecialidadesPostgre(nombreEspecialidad));
     }
@@ -55,12 +55,14 @@ public class Programa {
         String telefono = ValidarDatos.leerTelefono();
         String email = ValidarDatos.leerEmail();
 
-        crearMedico(nombreMedico, nombreContacto, nif, telefono, email);
+        MedicosPostgreDAO.crear(new MedicosPostgre(nombreMedico, nombreContacto, nif, telefono, email));
     }
 
-    private static void crearMedico(String nombreMedico,String nombreContacto, String nif, String telefono, String email){
+
+
+    static void crearMedico(String nombreMedico, String nif, String telefono, String email){
         MedicosPostgreDAO medicoDAO = new MedicosPostgreDAO();
-        medicoDAO.crear(new MedicosPostgre(nombreMedico, nombreContacto, nif, telefono, email));
+        medicoDAO.crear(new MedicosPostgre(nombreMedico, nif, telefono, email));
     }
 
     private static void eliminarMedico() {
@@ -70,7 +72,7 @@ public class Programa {
         eliminarMedico(idMedico);
     }
 
-    private static void eliminarMedico(int id){
+    static void eliminarMedico(int id){
         MedicosPostgreDAO medicoDAO = new MedicosPostgreDAO();
         medicoDAO.eliminar(id);
     }
@@ -84,7 +86,7 @@ public class Programa {
         crearPaciente(nombre, email, fecha);
     }
 
-    private static void crearPaciente(String nombre, String email, LocalDate fecha){
+    static void crearPaciente(String nombre, String email, LocalDate fecha){
         PacientesMySqlDAO pacientesMySqlDAO = new PacientesMySqlDAO();
         pacientesMySqlDAO.crear(new PacientesMySql(nombre, email, fecha));
     }
@@ -95,7 +97,7 @@ public class Programa {
 
         eliminarPaciente(idPaciente);
     }
-    private static void eliminarPaciente(int id){
+    static void eliminarPaciente(int id){
         PacientesMySqlDAO pacientesMySqlDAO = new PacientesMySqlDAO();
         pacientesMySqlDAO.eliminar(id);
     }
@@ -118,7 +120,7 @@ public class Programa {
         crearTratamientoComun(nombre, descripcion, idEspecialidad, idMedico);
     }
 
-    private static void crearTratamiento(String nombre, String descripcion, String nombreEspecialidad, String nifMedico) {
+    static void crearTratamiento(String nombre, String descripcion, String nombreEspecialidad, String nifMedico) {
         EspecialidadesPostgreDAO especialidadesDAO = new EspecialidadesPostgreDAO();
         MedicosPostgreDAO medicosDAO = new MedicosPostgreDAO();
 
@@ -147,7 +149,7 @@ public class Programa {
         eliminarTratamientoPorNombre(nombreTratamiento);
     }
 
-    private static void eliminarTratamientoPorNombre(String nombre) {
+    static void eliminarTratamientoPorNombre(String nombre) {
         TratamientosMySqlDAO mySqlDAO = new TratamientosMySqlDAO();
         TratamientosPostgreDAO postgreDAO = new TratamientosPostgreDAO();
 
@@ -168,20 +170,20 @@ public class Programa {
         listarTratamientosConPocosPacientes(numeroDePacientes);
     }
 
-    private static void listarTratamientosConPocosPacientes(int cantidad) {
+    static void listarTratamientosConPocosPacientes(int cantidad) {
         PacientesTratamientosMySqlDAO pacientesTratamientosMySqlDAO = new PacientesTratamientosMySqlDAO();
         pacientesTratamientosMySqlDAO.tratamientoPorNumeroPacientes(cantidad);
     }
 
-    private static void obtenerCitasPorPaciente() {
+    static void obtenerTotalCitasPorPaciente() {
         CitasMySqlDAO.totalCitasPorPaciente();
     }
 
-    private static void obtenerCantidadTratamientosPorSala() {
+    static void obtenerCantidadTratamientosPorSala() {
         SalasTratamientosPostgreDAO.listarTratamientosPorSala();
     }
 
-    private static void listarTratamientosConEspecialidadYMedico() {
+    static void listarTratamientosConEspecialidadYMedico() {
         FuncionesCombinadasDAO.listarTratamientosConEspecialidadesYMedicos();
     }
 
@@ -190,7 +192,7 @@ public class Programa {
         int idEspecialidad = ValidarDatos.enteroCorrecto("\nSelecciona la especialidad: ",1 , Integer.MAX_VALUE);
         obtenerPacientesPorEspecialidad(idEspecialidad);
     }
-    private static void obtenerPacientesPorEspecialidad(int idEspecialidad) {
+    static void obtenerPacientesPorEspecialidad(int idEspecialidad) {
         TratamientosPostgreDAO.obtenerTratamientoPorEspecialidad(idEspecialidad);
     }
 
@@ -252,6 +254,4 @@ public class Programa {
 
         System.out.println("Hasta luego!");
     }
-
-
 }

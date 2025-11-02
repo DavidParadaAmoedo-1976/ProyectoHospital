@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class MedicosPostgreDAO{
 
-    public void crear(MedicosPostgre medico) {
+    public static void crear(MedicosPostgre medico) {
         String sql = "insert into hospital.medicos (nombre_medico, contacto)" +
                      "values (?, row(?, ?, ?, ?)::hospital.contacto_medico)";
 

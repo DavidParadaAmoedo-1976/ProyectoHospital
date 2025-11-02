@@ -25,6 +25,12 @@ public class MedicosPostgre {
         this.email = email;
     }
 
+    public MedicosPostgre(String nombre, String nif, String telefono, String email) {
+        this.nombre = nombre;
+        this.nif = nif;
+        this.telefono = telefono;
+        this.email = email;
+    }
 
     public int getIdMedico() { return idMedico; }
     public void setIdMedico(int idMedico) { this.idMedico = idMedico; }

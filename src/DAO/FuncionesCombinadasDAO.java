@@ -16,16 +16,16 @@ public class FuncionesCombinadasDAO {
         String sqlPostgre = """
                             select t.id_tratamiento, e.nombre_especialidad, m.nombre_medico
                             from hospital.tratamientos t
-                            join hospital.especialidades e
+                            left join hospital.especialidades e
                             on t.id_especialidad = e.id_especialidad
-                            join hospital.medicos m ON t.id_medico = m.id_medico
-                            order by t.id_tratamiento;
+                            left join hospital.medicos m ON t.id_medico = m.id_medico
+                            order by t.id_tratamiento
                             """;
 
         String sqlMySQL = """
                             select id_tratamiento, nombre_tratamiento, descripcion
                             from tratamientos
-                            order by id_tratamiento;
+                            order by id_tratamiento
                             """;
 
         try (
